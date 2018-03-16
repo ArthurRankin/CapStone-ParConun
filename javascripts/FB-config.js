@@ -14,9 +14,9 @@ var config = {
 };
 
 
-firebase.getFBsettings = function(){
-	 console.log("getFBsettings", config);
-	 return config;
+firebase.getFBsettings = () => {
+  console.log("getFBsettings", config);
+  return config;
 };
 
 firebase.initializeApp(config);

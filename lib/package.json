@@ -20,9 +20,10 @@
     "jshint-stylish": "^2.2.1",
     "matchdep": "^2.0.0"
   },
-  "description": "NPM package for Doo",
-  "main": "../index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "firebase": "^3.6.9",
+    "materialize": "^1.0.0",
+    "materialize-css": "^0.97.8"
   }
 }
+

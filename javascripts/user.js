@@ -1,5 +1,6 @@
 "use strict";
-console.log("user page is good");
+console.log('this is the user page');
+
 
 
 //install firebase into lib folder npm install firebase --save
