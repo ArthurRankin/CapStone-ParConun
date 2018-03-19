@@ -52,8 +52,31 @@ let addPostHeader = () => {
 //DOM UPDATE FOR "ADD CONVERSATION" PAGE
 let postConvo = () => {
     $('#dom-updater').html(`
-    <button type="button" id="add-convo" class="btn btn-primary btn-sm mb-5">Post conversation</button>
+    <button type="button" id="post-convo" class="btn btn-primary btn-sm mb-3">Post conversation</button><br>
+    <select name="select city" id="select-category" class="mb-3">
+    
+    </select><br>
+    <input type="text" id="title-input" class="col-4 mb-3" placeholder="Title of Conversation"><br>
+    <textarea value="Add Comment" rows="4" cols="50" id="comment-area" class="p-5 mb-5 mr-5">
+
     `);
+};
+
+
+
+//EMPTY VARIABLES FOR CATSELECTOR METHOD
+let catD;
+let catSelect;
+
+//CATEGORY DROPDOWN
+let catSelector = () => {
+    db.getCategory()
+    .then((catData) => {
+        for (var i = 0; i < catData.length; i++) {
+            catSelect += `<option value=${catData[i].id}>${catData[i].title}</option>`;
+        }
+        $('#select-category').html(catSelect);
+    });
 };
 
 
@@ -61,5 +84,4 @@ let postConvo = () => {
 
 
 
-
-module.exports = {catTitleUpdate, threadBuilder, addPostHeader};
+module.exports = {catTitleUpdate, threadBuilder, addPostHeader, postConvo, catSelector};

@@ -36,4 +36,41 @@ function addUser(userObj) {
 
 
 
-module.exports = {buildUserObj, addUser};
+//PULLING DOWN CATEGORY JSON FROM FIREBASE TO USE
+let getCategory = () => {
+    return $.ajax({
+      url: `${FBconfig.getFBsettings().databaseURL}/categories.json`
+    }).done((data) => {
+      return data;
+    });
+  
+  };
+
+
+
+
+//THREAD OBJECT BUILDER
+let buildThreadObj = (catID, threadTitle, comment, userName) => {
+    let threadObj = {
+        id: catID,
+        title: threadTitle,
+        comments: comment,
+        name: userName
+    };
+    return threadObj;
+};
+
+
+function addThread(threadObj) {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/threads.json`,
+        type: 'POST',
+        data: JSON.stringify(threadObj),
+        dataType: 'json'
+    }).done((threadData) => {
+        return threadData;
+    });
+}
+
+
+module.exports = {buildUserObj, addUser, getCategory, buildThreadObj, addThread};

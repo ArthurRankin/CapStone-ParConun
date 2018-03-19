@@ -5,17 +5,16 @@
 //install firebase into lib folder npm install firebase --save
 var firebase = require("./fb-config"),
 	 provider = new firebase.auth.GoogleAuthProvider(),
-	 currentUser = null;
+	 currentUser = null,
+	 currentUserName = null;
 
 //listen for changed state
 firebase.auth().onAuthStateChanged((user) => {
-	//console.log("onAuthStateChanged", user);
 	if (user){
 		currentUser = user.uid;
-		//console.log("current user Logged in?", currentUser);
+		currentUserName = user.displayName;
 	}else {
 		currentUser = null;
-		//console.log("current user NOT logged in:", currentUser);
 	}
 });
 
@@ -36,4 +35,8 @@ function setUser(val){
 	currentUser = val;
 }
 
-module.exports = {logInGoogle, logOut, getUser, setUser};
+let getUserName = () =>{
+	return currentUserName;
+};
+
+module.exports = {logInGoogle, logOut, getUser, setUser, getUserName};
