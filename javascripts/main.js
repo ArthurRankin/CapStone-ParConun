@@ -19,3 +19,8 @@ $("#login").click(function() {
     });
 });
 
+
+
+$('#spec-needs').click(function() {
+    DOM.topDivPara("Special Needs");
+});

@@ -10,4 +10,20 @@ let FBkeys = require("./fb-key"),
 
 
 
-    
+
+let topDivPara = (category) => {
+    $('#description').html(`<u>${category}</u>`);
+    $('#decrtiption').addClass('');
+};
+
+
+
+
+
+
+
+
+
+
+
+module.exports = {topDivPara};
