@@ -11,15 +11,16 @@ let FBkeys = require("./fb-key"),
 
 
 //UPDATING THE TOP DIV DEPENDING ON CATEGORY CLICKED ON
-let topDivPara = (category) => {
+let catTitleUpdate = (category) => {
     $('#description').html(`<u>${category}</u>`);
     $('#decrtiption').addClass('');
 };
 
 
+//THREAD BUILDER 
 let threadBuilder = () => {
     $('#dom-updater').html(`
-    <button type="button" class="btn btn-primary btn-sm mb-5">Add Conversation</button>
+    <button type="button" id="add-convo" class="btn btn-primary btn-sm mb-5">Add Conversation</button>
     <table class="table table-striped table-bordered mb-5">
         <thead class="thead-dark">
             <tr>
@@ -41,10 +42,24 @@ let threadBuilder = () => {
 
 
 
+//"ADD CONVERSATION" TOP HEADER UPDATE
+let addPostHeader = () => {
+    $('#description').html(`<u>Add Conversation</u>`);
+};
+
+
+
+//DOM UPDATE FOR "ADD CONVERSATION" PAGE
+let postConvo = () => {
+    $('#dom-updater').html(`
+    <button type="button" id="add-convo" class="btn btn-primary btn-sm mb-5">Post conversation</button>
+    `);
+};
 
 
 
 
 
 
-module.exports = {topDivPara, threadBuilder};
+
+module.exports = {catTitleUpdate, threadBuilder, addPostHeader};

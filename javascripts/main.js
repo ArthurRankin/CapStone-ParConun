@@ -20,8 +20,14 @@ $("#login").click(function() {
 });
 
 
-
+//SPECIAL NEEDS CATEGORY BUTTON
 $('#spec-needs').click(function() {
-    DOM.topDivPara("Special Needs");
+    DOM.catTitleUpdate("Special Needs");
     DOM.threadBuilder();
+});
+
+
+//ADD CONVERSATION BUTTON
+$('#dom-updater').on("click", '#add-convo', function() {
+    DOM.addPostHeader();
 });

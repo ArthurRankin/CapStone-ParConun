@@ -1,0 +1,23 @@
+{
+        "categories": [
+            {
+            "id": 1,
+            "title": "0 - 6 months old"
+            }, {
+            "id": 2,
+            "title": "6 months - 2 years 0ld"
+            }, {
+            "id": 3,
+            "title": "2 years - 6 years old"
+            }, {
+            "id": 4,
+            "title": "6 years - 12 years old"
+            }, {
+            "id": 5,
+            "title": "Special Needs"
+            }, {
+            "id": 6,
+            "title": "General"
+            }
+    ]
+}
