@@ -14,11 +14,11 @@ let FBkeys = require("./fb-key"),
 
 //BUILDING THE USER OBJECT
 let buildUserObj = (displayName) => {
-    let WeatherObj = {
+    let userObj = {
         Name:displayName,
         uid: user.getUser()
     };
-    return WeatherObj;
+    return userObj;
 };
 
 
