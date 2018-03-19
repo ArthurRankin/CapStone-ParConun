@@ -35,6 +35,7 @@ $('#dom-updater').on("click", '#add-convo', function() {
     .then((catData) => {
         DOM.catSelector();
     });
+    
 });
 
 
@@ -45,5 +46,6 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let category = $('#select-category').val();
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
-    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));    
+    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));  
+    DOM.threadBuilder();  
 });
