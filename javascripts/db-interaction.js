@@ -12,8 +12,7 @@ let FBkeys = require("./fb-key"),
 
 
 
-
-    
+//BUILDING THE USER OBJECT
 let buildUserObj = (displayName) => {
     let WeatherObj = {
         Name:displayName,
@@ -22,6 +21,8 @@ let buildUserObj = (displayName) => {
     return WeatherObj;
 };
 
+
+//POSTING THE USER OBJECT TO FIREBASE
 function addUser(userObj) {
 	return $.ajax({
       url: `${FBconfig.getFBsettings().databaseURL}/users.json`,
