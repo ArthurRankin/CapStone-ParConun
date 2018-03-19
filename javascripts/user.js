@@ -1,5 +1,4 @@
 "use strict";
-console.log('this is the user page');
 
 
 
