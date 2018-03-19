@@ -1,5 +1,4 @@
 "use strict";
-console.log('we all set up on main');
 
 let FBkeys = require("./fb-key"),
     FBconfig = require("./fb-config"),
@@ -16,6 +15,7 @@ $("#login").click(function() {
     user.logInGoogle()
     .then((userData) => {
         console.log(userData);
+        db.addUser(db.buildUserObj(userData.user.displayName));
     });
 });
 
