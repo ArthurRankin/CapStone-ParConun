@@ -24,10 +24,26 @@ $("#login").click(function() {
 $('#spec-needs').click(function() {
     DOM.catTitleUpdate("Special Needs");
     DOM.threadBuilder();
-});
+}); 
 
 
 //ADD CONVERSATION BUTTON
 $('#dom-updater').on("click", '#add-convo', function() {
     DOM.addPostHeader();
+    DOM.postConvo();
+    db.getCategory()
+    .then((catData) => {
+        DOM.catSelector();
+    });
+});
+
+
+
+
+//POST THREAD TO FIREBASE VIA THE "POST CONVERSATION" BUTTON
+$('#dom-updater').on("click", "#post-convo", function() {
+    let category = $('#select-category').val();
+    let title = $('#title-input').val();
+    let comments = $('#comment-area').val();
+    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));    
 });
