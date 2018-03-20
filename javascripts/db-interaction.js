@@ -79,8 +79,6 @@ let addThread = (threadObj) => {
 
 
 
-
-
 //USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
 let getThreadData = () => {
      return $.ajax({
@@ -94,13 +92,37 @@ let getThreadData = () => {
 
 
  //BUILDING THE COMMENTS OBJECT
- let buildCommentObj = () => {
-
+ let buildCommentObj = (catID, comment, userName) => {
+    let commentObj = {
+        id: catID,
+        comments: comment,
+        name: userName
+    };
+    return commentObj;
  };
 
 
+//POSTING THE COMMENTS TO FIREBASE FOR SAVING AND LATER USE
+let addComment = (commentObj) => {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/comments.json`,
+        type: 'POST',
+        data: JSON.stringify(commentObj),
+        dataType: 'json'
+    }).done((commentData) => {
+        return commentData;
+    });
+};
 
 
 
 
-module.exports = {buildUserObj, addUser, getCategory, buildThreadObj, addThread, getThreadData};
+module.exports = {
+    buildUserObj,
+    addUser,
+    getCategory, 
+    buildThreadObj, 
+    addThread, 
+    getThreadData, 
+    buildCommentObj, 
+    addComment};

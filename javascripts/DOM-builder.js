@@ -17,6 +17,16 @@ let catTitleUpdate = (category) => {
 };
 
 
+//"ADD CONVERSATION" TOP HEADER UPDATE
+let addPostHeader = () => {
+    $('#description').html(`<u>Add Conversation</u>`);
+};
+
+//UPDATING THE HEADER WHEN A THREAD IS CLICKED
+let threadHeader = (threadTitle) => {
+    $('#description').html(`<u>${threadTitle}</u>`);
+};
+
 
 //THREAD BUILDER 
 let threadBuilder = () => {
@@ -27,7 +37,7 @@ let threadBuilder = () => {
             threads += `
                     <tbody>
                         <tr>
-                            <th scope="row" id="thread-btn">${threadData[item].title}</th>
+                            <th scope="row" id="thread-btn" class="${threadData[item].title}">${threadData[item].title}</th>
                             <td>${threadData[item].comments}</td>
                             <td>${threadData[item].name}</td>
                         </tr>
@@ -55,10 +65,6 @@ let threadBuilder = () => {
         
         
         
-//"ADD CONVERSATION" TOP HEADER UPDATE
-let addPostHeader = () => {
-    $('#description').html(`<u>Add Conversation</u>`);
-};
 
 
 
@@ -95,6 +101,19 @@ let catSelector = () => {
 
 
 
+let convoPage = () => {
+    let convo = "";
+    
+};
 
 
-module.exports = {catTitleUpdate, threadBuilder, addPostHeader, postConvo, catSelector};
+
+
+
+module.exports = {
+    catTitleUpdate, 
+    threadBuilder, 
+    addPostHeader, 
+    postConvo, 
+    catSelector,
+    threadHeader};
