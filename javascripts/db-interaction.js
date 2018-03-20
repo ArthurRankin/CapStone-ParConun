@@ -84,10 +84,7 @@ let addThread = (threadObj) => {
 //USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
 let getThreadData = () => {
      return $.ajax({
-         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`,
-         type: 'GET',
-         data: JSON.stringify(),
-         dataType: 'json'
+         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`
      }).done((threadData) => {
          return threadData;
 

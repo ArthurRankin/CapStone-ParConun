@@ -19,12 +19,11 @@ let catTitleUpdate = (category) => {
 
 
 //THREAD BUILDER 
-let threads = "";
 let threadBuilder = () => {
+    let threads = "";
     db.getThreadData()
     .then((threadData) => {
         for (let item in threadData) {
-            console.log(threadData[item].comments);
             threads += `
                     <tbody>
                         <tr>
