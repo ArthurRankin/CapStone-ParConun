@@ -46,8 +46,17 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let category = $('#select-category').val();
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
-    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName())); 
-    db.addComment(db.buildCommentObj(category,comments, user.getUserName())); 
+    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));
+
+    db.getThreadData()
+    .then((threadData) => {
+        console.log(threadData);
+        let threadID = "";
+        for (let item in threadData) {
+            threadID = item;           
+        }
+        db.addComment(db.buildCommentObj(threadID, comments, user.getUserName()));
+    }); 
     DOM.threadBuilder();  
 });
 
@@ -55,4 +64,18 @@ $('#dom-updater').on("click", "#post-convo", function() {
 //GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
 $('#dom-updater').on('click', '#thread-btn', function() {
     DOM.threadHeader($('#thread-btn').attr('class'));
+    DOM.convoPage();
+});
+
+
+$('#dom-updater').on('click', '#add-com', function() {
+    DOM.addCom();
+    DOM.addComHeader();
+});
+
+
+$('#dom-updater').on("click", "#post-com", function() {
+    let comments = $('#comment-area').val();
+    db.addComment(db.buildCommentObj('3', comments, user.getUserName())); 
+    DOM.convoPage();  
 });

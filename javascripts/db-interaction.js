@@ -52,7 +52,7 @@ let getCategory = () => {
 //THREAD OBJECT BUILDER
 let buildThreadObj = (catID, threadTitle, comment, userName) => {
     let threadObj = {
-        id: catID,
+        categoryID: catID,
         title: threadTitle,
         comments: comment,
         name: userName
@@ -92,9 +92,9 @@ let getThreadData = () => {
 
 
  //BUILDING THE COMMENTS OBJECT
- let buildCommentObj = (catID, comment, userName) => {
+ let buildCommentObj = (thread, comment, userName) => {
     let commentObj = {
-        id: catID,
+        threadID: thread,
         comments: comment,
         name: userName
     };
@@ -116,6 +116,17 @@ let addComment = (commentObj) => {
 
 
 
+let getComData = () => {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/comments.json`
+    }).done((comData) => {
+        return comData;
+
+   });
+};
+
+
+
 
 module.exports = {
     buildUserObj,
@@ -125,4 +136,5 @@ module.exports = {
     addThread, 
     getThreadData, 
     buildCommentObj, 
-    addComment};
+    addComment,
+    getComData};

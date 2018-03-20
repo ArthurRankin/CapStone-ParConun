@@ -24,8 +24,16 @@ let addPostHeader = () => {
 
 //UPDATING THE HEADER WHEN A THREAD IS CLICKED
 let threadHeader = (threadTitle) => {
-    $('#description').html(`<u>${threadTitle}</u>`);
+    let a = `<u>${threadTitle}</u>`;
+    $('#description').html(a);
 };
+
+
+let addComHeader = () => {
+    $('#description').html(`<u>Add Comment</u>`);
+};
+
+
 
 
 //THREAD BUILDER 
@@ -71,7 +79,7 @@ let threadBuilder = () => {
 //DOM UPDATE FOR "ADD CONVERSATION" PAGE
 let postConvo = () => {
     $('#dom-updater').html(`
-    <button type="button" id="post-convo" class="btn btn-primary btn-sm mb-3">Post conversation</button><br>
+    <button type="button" id="post-convo" class="btn btn-primary btn-sm mb-3">Post Conversation</button><br>
     <select name="select city" id="select-category" class="mb-3">
     
     </select><br>
@@ -91,8 +99,8 @@ let catSelect;
 let catSelector = () => {
     db.getCategory()
     .then((catData) => {
-        for (var i = 0; i < catData.length; i++) {
-            catSelect += `<option value=${catData[i].id}>${catData[i].title}</option>`;
+        for (let item in catData) {
+            catSelect += `<option value=${item}>${catData[item].title}</option>`;
         }
         $('#select-category').html(catSelect);
     });
@@ -100,10 +108,34 @@ let catSelector = () => {
 
 
 
-
+//BUILDS THE CONVERSATION PAGE
 let convoPage = () => {
     let convo = "";
-    
+    db.getComData()
+    .then((comData) => {
+        for (let item in comData) {
+            convo += `<div class="border-bottom border-dark" id="${comData[item].id}">`;
+            convo += `<h5 class="ml-2 mt-3 pb-4">${comData[item].name}</h6>`;
+            convo += `<p class="ml-5 pt-3">${comData[item].comments}<p>`;
+            convo += `</div>`;
+
+            $('#dom-updater').html(`
+            <button type="button" id="add-com" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
+            ${convo}
+            `);
+        }
+    });
+};
+
+
+
+//SHOWS THE ADD COMMENT PAGE WHEN "ADD COMMENT" IS CLICKED
+let addCom = () => {
+    $('#dom-updater').html(`
+    <button type="button" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
+    <textarea rows="4" cols="50" id="comment-area" class="p-5 mb-5 mr-5">
+
+    `);
 };
 
 
@@ -116,4 +148,7 @@ module.exports = {
     addPostHeader, 
     postConvo, 
     catSelector,
-    threadHeader};
+    threadHeader,
+    convoPage,
+    addCom,
+    addComHeader};
