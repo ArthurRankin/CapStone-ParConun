@@ -46,6 +46,13 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let category = $('#select-category').val();
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
-    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));  
+    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName())); 
+    db.addComment(db.buildCommentObj(category,comments, user.getUserName())); 
     DOM.threadBuilder();  
+});
+
+
+//GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
+$('#dom-updater').on('click', '#thread-btn', function() {
+    DOM.threadHeader($('#thread-btn').attr('class'));
 });

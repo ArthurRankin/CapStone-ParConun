@@ -17,35 +17,54 @@ let catTitleUpdate = (category) => {
 };
 
 
-//THREAD BUILDER 
-let threadBuilder = () => {
-    $('#dom-updater').html(`
-    <button type="button" id="add-convo" class="btn btn-primary btn-sm mb-5">Add Conversation</button>
-    <table class="table table-striped table-bordered mb-5">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col"> # of comments </th>
-                <th scope="col"> User </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">Socializing</th>
-                <td>4</td>
-                <td>Arthur Smith</td>
-            </tr>
-        </tbody>
-    </table>`);
-};
-
-
-
-
 //"ADD CONVERSATION" TOP HEADER UPDATE
 let addPostHeader = () => {
     $('#description').html(`<u>Add Conversation</u>`);
 };
+
+//UPDATING THE HEADER WHEN A THREAD IS CLICKED
+let threadHeader = (threadTitle) => {
+    $('#description').html(`<u>${threadTitle}</u>`);
+};
+
+
+//THREAD BUILDER 
+let threadBuilder = () => {
+    let threads = "";
+    db.getThreadData()
+    .then((threadData) => {
+        for (let item in threadData) {
+            threads += `
+                    <tbody>
+                        <tr>
+                            <th scope="row" id="thread-btn" class="${threadData[item].title}">${threadData[item].title}</th>
+                            <td>${threadData[item].comments}</td>
+                            <td>${threadData[item].name}</td>
+                        </tr>
+                    </tbody>`;
+
+
+                $('#dom-updater').html(`
+                <button type="button" id="add-convo" class="btn btn-primary btn-sm mb-5">Add Conversation</button>
+                <table class="table table-striped table-bordered mb-5">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col"> # of comments </th>
+                            <th scope="col"> User </th>
+                        </tr>
+                    </thead>
+                    ${threads}
+                </table>`);
+        }
+    }
+);
+};
+
+        
+        
+        
+        
 
 
 
@@ -82,6 +101,19 @@ let catSelector = () => {
 
 
 
+let convoPage = () => {
+    let convo = "";
+    
+};
 
 
-module.exports = {catTitleUpdate, threadBuilder, addPostHeader, postConvo, catSelector};
+
+
+
+module.exports = {
+    catTitleUpdate, 
+    threadBuilder, 
+    addPostHeader, 
+    postConvo, 
+    catSelector,
+    threadHeader};
