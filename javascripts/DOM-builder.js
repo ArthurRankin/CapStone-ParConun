@@ -23,9 +23,8 @@ let addPostHeader = () => {
 };
 
 //UPDATING THE HEADER WHEN A THREAD IS CLICKED
-let threadHeader = (threadTitle) => {
-    let a = `<u>${threadTitle}</u>`;
-    $('#description').html(a);
+let threadHeader = (title) => {
+    $('#description').html(`<u>${title}</u>`);
 };
 
 
@@ -37,7 +36,7 @@ let addComHeader = () => {
 
 
 //THREAD BUILDER 
-let threadBuilder = () => {
+let threadBuilder = (ID) => {
     let threads = "";
     db.getThreadData()
     .then((threadData) => {
@@ -45,7 +44,7 @@ let threadBuilder = () => {
             threads += `
                     <tbody>
                         <tr>
-                            <th scope="row" id="thread-btn" class="${threadData[item].title}">${threadData[item].title}</th>
+                            <th id="${item}" scope="row" class="thread-btn">${threadData[item].title}</th>
                             <td>${threadData[item].comments}</td>
                             <td>${threadData[item].name}</td>
                         </tr>
@@ -58,7 +57,7 @@ let threadBuilder = () => {
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Title</th>
-                            <th scope="col"> # of comments </th>
+                            <th scope="col">First Comment</th>
                             <th scope="col"> User </th>
                         </tr>
                     </thead>
@@ -109,16 +108,21 @@ let catSelector = () => {
 
 
 //BUILDS THE CONVERSATION PAGE
-let convoPage = () => {
+let convoPage = (ID) => {
     let convo = "";
-    db.getComData()
+    console.log("the ID ", ID);
+    db.getComData(ID)
     .then((comData) => {
+        console.log(comData);
         for (let item in comData) {
-            convo += `<div class="border-bottom border-dark" id="${comData[item].id}">`;
+            if (ID === comData[item].threadID){
+            convo += `<div class="border-bottom border-dark" id="${comData[item].threadID}">`;
             convo += `<h5 class="ml-2 mt-3 pb-4">${comData[item].name}</h6>`;
             convo += `<p class="ml-5 pt-3">${comData[item].comments}<p>`;
             convo += `</div>`;
-
+            }else {
+                convo = `no comments yet`;
+            }
             $('#dom-updater').html(`
             <button type="button" id="add-com" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
             ${convo}

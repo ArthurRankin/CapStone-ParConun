@@ -62,9 +62,10 @@ $('#dom-updater').on("click", "#post-convo", function() {
 
 
 //GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
-$('#dom-updater').on('click', '#thread-btn', function() {
-    DOM.threadHeader($('#thread-btn').attr('class'));
-    DOM.convoPage();
+$('#dom-updater').on('click', '.thread-btn', function() {
+    DOM.threadHeader($('.thread-btn').text());
+    DOM.convoPage(event.target.id);
+
 });
 
 
@@ -75,7 +76,5 @@ $('#dom-updater').on('click', '#add-com', function() {
 
 
 $('#dom-updater').on("click", "#post-com", function() {
-    let comments = $('#comment-area').val();
-    db.addComment(db.buildCommentObj('3', comments, user.getUserName())); 
-    DOM.convoPage();  
+      
 });

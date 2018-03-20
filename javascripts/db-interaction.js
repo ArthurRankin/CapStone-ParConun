@@ -116,9 +116,9 @@ let addComment = (commentObj) => {
 
 
 
-let getComData = () => {
+let getComData = (threadID) => {
     return $.ajax({
-        url: `${FBconfig.getFBsettings().databaseURL}/comments.json`
+        url: `${FBconfig.getFBsettings().databaseURL}/comments.json?orderBy="threadID"&equalTo="${threadID}"`
     }).done((comData) => {
         return comData;
 
