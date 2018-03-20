@@ -23,7 +23,7 @@ let buildUserObj = (displayName) => {
 
 
 //POSTING THE USER OBJECT TO FIREBASE
-function addUser(userObj) {
+let addUser = (userObj) => {
 	return $.ajax({
       url: `${FBconfig.getFBsettings().databaseURL}/users.json`,
       type: 'POST',
@@ -32,7 +32,7 @@ function addUser(userObj) {
    }).done((userID) => {
       return userID;
    });
-}
+};
 
 
 
@@ -61,7 +61,12 @@ let buildThreadObj = (catID, threadTitle, comment, userName) => {
 };
 
 
-function addThread(threadObj) {
+
+
+
+
+//USES THE BUILD THREAD OBJECT METHOD AND POSTS IT TO FIRESBASE
+let addThread = (threadObj) => {
     return $.ajax({
         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`,
         type: 'POST',
@@ -70,7 +75,35 @@ function addThread(threadObj) {
     }).done((threadData) => {
         return threadData;
     });
-}
+};
 
 
-module.exports = {buildUserObj, addUser, getCategory, buildThreadObj, addThread};
+
+
+
+//USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
+let getThreadData = () => {
+     return $.ajax({
+         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`,
+         type: 'GET',
+         data: JSON.stringify(),
+         dataType: 'json'
+     }).done((threadData) => {
+         return threadData;
+
+    });
+ };
+
+
+
+ //BUILDING THE COMMENTS OBJECT
+ let buildCommentObj = () => {
+
+ };
+
+
+
+
+
+
+module.exports = {buildUserObj, addUser, getCategory, buildThreadObj, addThread, getThreadData};
