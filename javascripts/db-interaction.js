@@ -50,11 +50,10 @@ let getCategory = () => {
 
 
 //THREAD OBJECT BUILDER
-let buildThreadObj = (catID, threadTitle, comment, userName) => {
+let buildThreadObj = (catID, threadTitle, userName) => {
     let threadObj = {
         categoryID: catID,
         title: threadTitle,
-        comments: comment,
         name: userName
     };
     return threadObj;
@@ -147,11 +146,12 @@ let getComData = (threadID) => {
 };
 
 function deleteComment(commentID) {
+    console.log("commentID", commentID);
     return $.ajax({
       url: `${FBconfig.getFBsettings().databaseURL}/comments/${commentID}.json`,
-      method: 'DELETE',
-      data: JSON.stringify(commentID),
-      dataType: 'json'
+      method: 'DELETE'
+    //   data: JSON.stringify(commentID),
+    //   dataType: 'json'
     });
   }
 

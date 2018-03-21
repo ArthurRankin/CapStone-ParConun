@@ -73,7 +73,7 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let category = $('#post-convo').val();
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
-    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));
+    db.addThread(db.buildThreadObj(category, title, user.getUserName()));
 
     db.getThreadData($('#post-convo').val())
     .then((threadData) => {
@@ -90,7 +90,7 @@ $('#dom-updater').on("click", "#post-convo", function() {
 
 //GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
 $('#dom-updater').on('click', '.thread-btn', function() {
-    //console.log(event.target.id);
+    console.log(event.target.id);
     DOM.convoPage(event.target.id);
 });
 
@@ -113,10 +113,9 @@ $('#dom-updater').on("click", "#post-com", function() {
 
 
 
-$('#dom-updater').on("click", "#delete-btn", function() {
-    let commentID = $('#delete-btn').val();
+$('#dom-updater').on("click", "#delete-btn", function(e) {
+    let commentID = e.target.value;
     let threadID = $('#add-com').val();
-    console.log(commentID);
     db.deleteComment(commentID)
     .then((taco) => { 
         DOM.convoPage(threadID);
