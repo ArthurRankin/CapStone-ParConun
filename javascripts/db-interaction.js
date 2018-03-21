@@ -73,16 +73,32 @@ let addThread = (threadObj) => {
         data: JSON.stringify(threadObj),
         dataType: 'json'
     }).done((threadData) => {
-        return threadData;
+        console.log(threadData);
+        let FBobj = 
+        {
+            threadID: threadData.name
+        };
+        addFBkeys(FBobj, "threads", threadData.name);
+        //return threadData;
     });
 };
+
+function addFBkeys(object, element, FBkey) {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/${element}/${FBkey}.json`,
+        type: 'PATCH',
+        data: JSON.stringify(object),
+        dataType: 'json'
+    });
+}
+
 
 
 
 //USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
-let getThreadData = () => {
+let getThreadData = (categoryID) => {
      return $.ajax({
-         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`
+         url: `${FBconfig.getFBsettings().databaseURL}/threads.json?orderBy="categoryID"&equalTo="${categoryID}"`
      }).done((threadData) => {
          return threadData;
 
@@ -110,7 +126,12 @@ let addComment = (commentObj) => {
         data: JSON.stringify(commentObj),
         dataType: 'json'
     }).done((commentData) => {
-        return commentData;
+        console.log(commentData.name);
+        let FBobj = 
+        {
+            commentID: commentData.name
+        };
+        addFBkeys(FBobj, "comments", commentData.name);
     });
 };
 
