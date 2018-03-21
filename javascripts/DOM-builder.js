@@ -39,30 +39,28 @@ let addComHeader = () => {
 let threadBuilder = (ID) => {
     let threads = "";
     db.getThreadData(ID)
-    .then((threadData) => {
-        for (let item in threadData) {
-            if (ID === threadData[item].categoryID) {
-            threads += `
+        .then((threadData) => {
+            for (let item in threadData) {
+                if (ID === threadData[item].categoryID) {
+                    threads += `
                     <tbody>
                         <tr>
                             <th id="${item}" scope="row" class="thread-btn">${threadData[item].title}</th>
-                            <td>${threadData[item].comments}</td>
                             <td>${threadData[item].name}</td>
                         </tr>
                     </tbody>`;
-                }else{
+                } else {
                     threads = `<p>No Conversations Yet! Add One!!</p>`;
                 }
             }
-            
-            
+
+
             $('#dom-updater').html(`
             <button type="button" id="add-convo" value="${ID}" class="btn btn-primary btn-sm mb-5">Add Conversation</button>
             <table class="table table-striped table-bordered mb-5">
             <thead class="thead-dark">
             <tr>
             <th scope="col">Title</th>
-            <th scope="col">First Comment</th>
             <th scope="col"> User </th>
             </tr>
             </thead>
@@ -71,10 +69,10 @@ let threadBuilder = (ID) => {
         });
 };
 
-        
-        
-        
-        
+
+
+
+
 
 
 
@@ -91,43 +89,30 @@ let postConvo = (categoryid) => {
 
 
 
-//EMPTY VARIABLES FOR CATSELECTOR METHOD
-let catD;
-let catSelect;
-
-//CATEGORY DROPDOWN
-let catSelector = () => {
-    db.getCategory()
-    .then((catData) => {
-        for (let item in catData) {
-            catSelect += `<option value=${item}>${catData[item].title}</option>`;
-        }
-        $('#select-category').html(catSelect);
-    });
-};
-
-
-
 //BUILDS THE CONVERSATION PAGE
-let convoPage = (ID) => {
+let convoPage = (tID) => {
     let convo = "";
-    db.getComData(ID)
-    .then((comData) => {
-        for (let item in comData) {
-            if (ID === comData[item].threadID){
-            convo += `<div class="border-bottom border-dark" id="${comData[item].threadID}">`;
-            convo += `<h5 class="ml-2 mt-3 pb-4">${comData[item].name}</h6>`;
-            convo += `<p class="ml-5 pt-3">${comData[item].comments}<p>`;
-            convo += `</div>`;
-            }else {
-                convo = `no comments yet`;
-            }
-            $('#dom-updater').html(`
-            <button type="button" id="add-com" value="${ID}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
+    db.getComData(tID)
+        .then((comData) => {
+            for (let item in comData) {
+                //console.log('this is the commentID', comData[item].commentID);
+                if (tID === comData[item].threadID) {
+                    convo += `<div class="border-bottom border-dark d-flex justify-content-between" id="${comData[item].threadID}">`;
+                    convo += `<div class="d-flex flex-row">`;
+                    convo += `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
+                    convo += `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
+                    convo += `</div>`;
+                    convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-start mt-2">Delete</button>`;
+                    convo += `</div>`;
+                } else if (comData === 0) {
+                    convo = `no comments yet`;
+                }
+                $('#dom-updater').html(`
+            <button type="button" id="add-com" value="${tID}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
             ${convo}
             `);
-        }
-    });
+            }
+        });
 };
 
 
@@ -136,7 +121,9 @@ let convoPage = (ID) => {
 let addCom = (value) => {
     $('#dom-updater').html(`
     <button type="button" value="${value}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
-    <textarea rows="4" cols="50" id="comment-area" class="p-5 mb-5 mr-5">
+    <div class="form-group">
+    <textarea class="form-control" id="comment-area" rows="3"></textarea>
+  </div>
 
     `);
 };
@@ -146,12 +133,12 @@ let addCom = (value) => {
 
 
 module.exports = {
-    catTitleUpdate, 
-    threadBuilder, 
-    addPostHeader, 
-    postConvo, 
-    catSelector,
+    catTitleUpdate,
+    threadBuilder,
+    addPostHeader,
+    postConvo,
     threadHeader,
     convoPage,
     addCom,
-    addComHeader};
+    addComHeader
+};

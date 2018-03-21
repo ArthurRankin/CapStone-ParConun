@@ -73,7 +73,7 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let category = $('#post-convo').val();
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
-    db.addThread(db.buildThreadObj(category, title, comments, user.getUserName()));
+    db.addThread(db.buildThreadObj(category, title, user.getUserName()));
 
     db.getThreadData($('#post-convo').val())
     .then((threadData) => {
@@ -107,6 +107,17 @@ $('#dom-updater').on("click", "#post-com", function() {
     let threadID = $('#post-com').val();
     db.addComment(db.buildCommentObj(threadID, comment, user.getUserName()))
     .then((data) => { 
-    DOM.convoPage(threadID);
+        DOM.convoPage(threadID);
+    });
+});
+
+
+
+$('#dom-updater').on("click", "#delete-btn", function(e) {
+    let commentID = e.target.value;
+    let threadID = $('#add-com').val();
+    db.deleteComment(commentID)
+    .then((taco) => { 
+        DOM.convoPage(threadID);
     });
 });
