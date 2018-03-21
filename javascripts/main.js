@@ -90,7 +90,7 @@ $('#dom-updater').on("click", "#post-convo", function() {
 
 //GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
 $('#dom-updater').on('click', '.thread-btn', function() {
-    console.log(event.target.id);
+    //console.log(event.target.id);
     DOM.convoPage(event.target.id);
 });
 
@@ -107,6 +107,18 @@ $('#dom-updater').on("click", "#post-com", function() {
     let threadID = $('#post-com').val();
     db.addComment(db.buildCommentObj(threadID, comment, user.getUserName()))
     .then((data) => { 
-    DOM.convoPage(threadID);
+        DOM.convoPage(threadID);
+    });
+});
+
+
+
+$('#dom-updater').on("click", "#delete-btn", function() {
+    let commentID = $('#delete-btn').val();
+    let threadID = $('#add-com').val();
+    console.log(commentID);
+    db.deleteComment(commentID)
+    .then((taco) => { 
+        DOM.convoPage(threadID);
     });
 });

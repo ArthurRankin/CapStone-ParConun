@@ -109,21 +109,25 @@ let catSelector = () => {
 
 
 //BUILDS THE CONVERSATION PAGE
-let convoPage = (ID) => {
+let convoPage = (tID) => {
     let convo = "";
-    db.getComData(ID)
+    db.getComData(tID)
     .then((comData) => {
         for (let item in comData) {
-            if (ID === comData[item].threadID){
-            convo += `<div class="border-bottom border-dark" id="${comData[item].threadID}">`;
-            convo += `<h5 class="ml-2 mt-3 pb-4">${comData[item].name}</h6>`;
-            convo += `<p class="ml-5 pt-3">${comData[item].comments}<p>`;
+            console.log('this is the commentID', comData[item].commentID);
+            if (tID === comData[item].threadID){
+            convo += `<div class="border-bottom border-dark d-flex justify-content-between" id="${comData[item].threadID}">`;
+            convo += `<div class="d-flex flex-row">`;
+            convo += `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
+            convo += `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
+            convo += `</div>`;
+            convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-start mt-2">Delete</button>`;
             convo += `</div>`;
             }else {
-                convo = `no comments yet`;
+            convo = `no comments yet`;
             }
             $('#dom-updater').html(`
-            <button type="button" id="add-com" value="${ID}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
+            <button type="button" id="add-com" value="${tID}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
             ${convo}
             `);
         }

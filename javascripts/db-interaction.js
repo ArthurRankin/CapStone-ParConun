@@ -126,7 +126,7 @@ let addComment = (commentObj) => {
         data: JSON.stringify(commentObj),
         dataType: 'json'
     }).done((commentData) => {
-        console.log(commentData.name);
+        //console.log(commentData.name);
         let FBobj = 
         {
             commentID: commentData.name
@@ -146,6 +146,14 @@ let getComData = (threadID) => {
    });
 };
 
+function deleteComment(commentID) {
+    return $.ajax({
+      url: `${FBconfig.getFBsettings().databaseURL}/comments/${commentID}.json`,
+      method: 'DELETE',
+      data: JSON.stringify(commentID),
+      dataType: 'json'
+    });
+  }
 
 
 
@@ -158,4 +166,5 @@ module.exports = {
     getThreadData, 
     buildCommentObj, 
     addComment,
-    getComData};
+    getComData,
+    deleteComment};
