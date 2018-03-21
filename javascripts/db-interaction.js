@@ -52,7 +52,7 @@ let getCategory = () => {
 //THREAD OBJECT BUILDER
 let buildThreadObj = (catID, threadTitle, comment, userName) => {
     let threadObj = {
-        id: catID,
+        categoryID: catID,
         title: threadTitle,
         comments: comment,
         name: userName
@@ -73,16 +73,32 @@ let addThread = (threadObj) => {
         data: JSON.stringify(threadObj),
         dataType: 'json'
     }).done((threadData) => {
-        return threadData;
+        console.log(threadData);
+        let FBobj = 
+        {
+            threadID: threadData.name
+        };
+        addFBkeys(FBobj, "threads", threadData.name);
+        //return threadData;
     });
 };
+
+function addFBkeys(object, element, FBkey) {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/${element}/${FBkey}.json`,
+        type: 'PATCH',
+        data: JSON.stringify(object),
+        dataType: 'json'
+    });
+}
+
 
 
 
 //USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
-let getThreadData = () => {
+let getThreadData = (categoryID) => {
      return $.ajax({
-         url: `${FBconfig.getFBsettings().databaseURL}/threads.json`
+         url: `${FBconfig.getFBsettings().databaseURL}/threads.json?orderBy="categoryID"&equalTo="${categoryID}"`
      }).done((threadData) => {
          return threadData;
 
@@ -92,9 +108,9 @@ let getThreadData = () => {
 
 
  //BUILDING THE COMMENTS OBJECT
- let buildCommentObj = (catID, comment, userName) => {
+ let buildCommentObj = (thread, comment, userName) => {
     let commentObj = {
-        id: catID,
+        threadID: thread,
         comments: comment,
         name: userName
     };
@@ -110,8 +126,24 @@ let addComment = (commentObj) => {
         data: JSON.stringify(commentObj),
         dataType: 'json'
     }).done((commentData) => {
-        return commentData;
+        console.log(commentData.name);
+        let FBobj = 
+        {
+            commentID: commentData.name
+        };
+        addFBkeys(FBobj, "comments", commentData.name);
     });
+};
+
+
+
+let getComData = (threadID) => {
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}/comments.json?orderBy="threadID"&equalTo="${threadID}"`
+    }).done((comData) => {
+        return comData;
+
+   });
 };
 
 
@@ -125,4 +157,5 @@ module.exports = {
     addThread, 
     getThreadData, 
     buildCommentObj, 
-    addComment};
+    addComment,
+    getComData};
