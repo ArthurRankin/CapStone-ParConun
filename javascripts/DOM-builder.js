@@ -27,7 +27,7 @@ let threadHeader = (title) => {
     $('#description').html(`<u>${title}</u>`);
 };
 
-
+//UPDATES THE HEADER ON THE ADD COMMENT PAGE
 let addComHeader = () => {
     $('#description').html(`<u>Add Comment</u>`);
 };
@@ -35,7 +35,7 @@ let addComHeader = () => {
 
 
 
-//THREAD BUILDER 
+//BUILDING THE THREAD PAGE 
 let threadBuilder = (ID) => {
     let threads = "";
     db.getThreadData(ID)
@@ -60,7 +60,7 @@ let threadBuilder = (ID) => {
             <table class="table table-striped table-bordered mb-5">
             <thead class="thead-dark">
             <tr>
-            <th scope="col">Title</th>
+            <th scope="col">Conversation Title</th>
             <th scope="col"> User </th>
             </tr>
             </thead>
@@ -72,17 +72,16 @@ let threadBuilder = (ID) => {
 
 
 
-
-
-
-
-//DOM UPDATE FOR "ADD CONVERSATION" PAGE
+//DOM UPDATE FOR THE ADD CONVERSATION PAGE
 let postConvo = (categoryid) => {
     $('#dom-updater').html(`
     <button type="button" id="post-convo" value="${categoryid}" class="btn btn-primary btn-sm mb-3">Post Conversation</button><br>
     
     <input type="text" id="title-input" class="col-4 mb-3" placeholder="Title of Conversation"><br>
-    <textarea value="Add Comment" rows="4" cols="50" id="comment-area" class="p-5 mb-5 mr-5">
+    <div class="form-group">
+        <textarea class="form-control" id="comment-area" rows="3"></textarea>
+    </div>
+
 
     `);
 };
@@ -122,8 +121,8 @@ let addCom = (value) => {
     $('#dom-updater').html(`
     <button type="button" value="${value}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
     <div class="form-group">
-    <textarea class="form-control" id="comment-area" rows="3"></textarea>
-  </div>
+        <textarea class="form-control" id="comment-area" rows="3"></textarea>
+    </div>
 
     `);
 };

@@ -9,7 +9,7 @@ let FBkeys = require("./fb-key"),
 
 
 
-//GOOGLE LOGIN
+//GOOGLE LOGIN BUTTON
 $("#login").click(function() {
     console.log("clicked auth");
     user.logInGoogle()
@@ -20,22 +20,25 @@ $("#login").click(function() {
 });
 
 
-
+//0 - 6 MONTHS OLD CATEGORY BUTTON
 $('#0months').click(function() {
     DOM.catTitleUpdate("0 - 6 months old");
     DOM.threadBuilder($('#0months').attr('name'));
 });
 
+//6 MONTHS - 2 YEARS OLD CATEGORY BUTTON
 $('#6months').click(function() {
     DOM.catTitleUpdate("6 months - 2 years old");
     DOM.threadBuilder($('#6months').attr('name'));
 });
 
+//2 - 6 YEAR OLD CATEGORY BUTTON
 $('#2yearOlds').click(function() {
     DOM.catTitleUpdate("2 Years - 6 Years");
     DOM.threadBuilder($('#2yearOlds').attr('name'));
 }); 
 
+//6 - 12 YEAR OLD CATEGORY BUTTON
 $('#6years').click(function() {
     DOM.catTitleUpdate("6 Years - 12 Years");
     DOM.threadBuilder($('#6years').attr('name'));
@@ -47,6 +50,7 @@ $('#spec-needs').click(function() {
     DOM.threadBuilder($('#spec-needs').attr('name'));
 }); 
 
+//GENERAL CATEGORY BUTTON
 $('#general').click(function() {
     DOM.catTitleUpdate("General");
     DOM.threadBuilder($('#general').attr('name'));
@@ -60,12 +64,8 @@ $('#dom-updater').on("click", '#add-convo', function() {
     let id = $('#add-convo').val();
     console.log(id);
     DOM.addPostHeader();
-    DOM.postConvo(id);
-    
-    
+    DOM.postConvo(id); 
 });
-
-
 
 
 //POST THREAD TO FIREBASE VIA THE "POST CONVERSATION" BUTTON
@@ -88,13 +88,14 @@ $('#dom-updater').on("click", "#post-convo", function() {
 });
 
 
-//GOT TO CONVERSATION PAGE VIA CLICKING ON THREADS
-$('#dom-updater').on('click', '.thread-btn', function() {
+//LOAD CONVERSATION PAGE VIA CLICKING ON THREADS
+$('#dom-updater').on('click', '.thread-btn', function(event) {
     console.log(event.target.id);
     DOM.convoPage(event.target.id);
 });
 
 
+//LOADS THE ADD COMMENT PAGE VIA THE ADD COMMENT BUTTON
 $('#dom-updater').on('click', '#add-com', function() {
     let val = $('#add-com').val();
     DOM.addCom(val);
@@ -102,6 +103,7 @@ $('#dom-updater').on('click', '#add-com', function() {
 });
 
 
+//BUILDS AND POSTS THE COMMENT TO FIREBASE AND THEN LOADS THE CONVERSATION PAGE VIA THE POST COMMENT BUTTON
 $('#dom-updater').on("click", "#post-com", function() {
     let comment = $('#comment-area').val();
     let threadID = $('#post-com').val();
@@ -112,7 +114,7 @@ $('#dom-updater').on("click", "#post-com", function() {
 });
 
 
-
+//DELETES THE SELECTED COMMENT FROM FIREBASE AND LOADS THE CONVO PAGE WITH OUT THE COMMENT VIA DELETE BUTTON
 $('#dom-updater').on("click", "#delete-btn", function(e) {
     let commentID = e.target.value;
     let threadID = $('#add-com').val();
