@@ -21,7 +21,6 @@ let buildUserObj = (displayName) => {
     return userObj;
 };
 
-
 //POSTING THE USER OBJECT TO FIREBASE
 let addUser = (userObj) => {
 	return $.ajax({
@@ -35,7 +34,6 @@ let addUser = (userObj) => {
 };
 
 
-
 //PULLING DOWN CATEGORY JSON FROM FIREBASE TO USE
 let getCategory = () => {
     return $.ajax({
@@ -43,10 +41,7 @@ let getCategory = () => {
     }).done((data) => {
       return data;
     });
-  
-  };
-
-
+};
 
 
 //THREAD OBJECT BUILDER
@@ -58,10 +53,6 @@ let buildThreadObj = (catID, threadTitle, userName) => {
     };
     return threadObj;
 };
-
-
-
-
 
 
 //USES THE BUILD THREAD OBJECT METHOD AND POSTS IT TO FIRESBASE
@@ -82,6 +73,8 @@ let addThread = (threadObj) => {
     });
 };
 
+
+//SHOVES OBJECTS OWN GOOGLE ID INTO ITS SELF FOR LATER USE
 function addFBkeys(object, element, FBkey) {
     return $.ajax({
         url: `${FBconfig.getFBsettings().databaseURL}/${element}/${FBkey}.json`,
@@ -92,29 +85,27 @@ function addFBkeys(object, element, FBkey) {
 }
 
 
-
-
 //USED TO PULL DOWN THE THREADS DATA TO POPULATE THE DOM
 let getThreadData = (categoryID) => {
      return $.ajax({
          url: `${FBconfig.getFBsettings().databaseURL}/threads.json?orderBy="categoryID"&equalTo="${categoryID}"`
      }).done((threadData) => {
          return threadData;
-
     });
- };
+};
 
 
 
  //BUILDING THE COMMENTS OBJECT
- let buildCommentObj = (thread, comment, userName) => {
+ let buildCommentObj = (thread, comment, userName, userID) => {
     let commentObj = {
         threadID: thread,
         comments: comment,
-        name: userName
+        name: userName,
+        uid: userID
     };
     return commentObj;
- };
+};
 
 
 //POSTING THE COMMENTS TO FIREBASE FOR SAVING AND LATER USE
@@ -135,7 +126,7 @@ let addComment = (commentObj) => {
 };
 
 
-
+//PULLING DOWN COMMENT DATA TO POPULATE DOM
 let getComData = (threadID) => {
     return $.ajax({
         url: `${FBconfig.getFBsettings().databaseURL}/comments.json?orderBy="threadID"&equalTo="${threadID}"`
@@ -145,15 +136,15 @@ let getComData = (threadID) => {
    });
 };
 
+
+//UESES THE COMMENT ID TO DELETE THE COMMENT BELONGING TO IT
 function deleteComment(commentID) {
     console.log("commentID", commentID);
     return $.ajax({
       url: `${FBconfig.getFBsettings().databaseURL}/comments/${commentID}.json`,
       method: 'DELETE'
-    //   data: JSON.stringify(commentID),
-    //   dataType: 'json'
     });
-  }
+}
 
 
 
