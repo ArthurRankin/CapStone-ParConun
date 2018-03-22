@@ -23,8 +23,8 @@ let addPostHeader = () => {
 };
 
 //UPDATING THE HEADER WHEN A THREAD IS CLICKED
-let threadHeader = (title) => {
-    $('#description').html(`<u>${title}</u>`);
+let threadHeader = (title) => { 
+    $('#description').html(`<u value='${title}' id='t-header'>${title}</u>`);
 };
 
 //UPDATES THE HEADER ON THE ADD COMMENT PAGE
@@ -45,7 +45,7 @@ let threadBuilder = (ID) => {
                     threads += `
                     <tbody>
                         <tr>
-                            <th id="${item}" scope="row" class="thread-btn">${threadData[item].title}</th>
+                            <th id="${item}" scope="row" value="${threadData[item].title}" class="thread-btn">${threadData[item].title}</th>
                             <td>${threadData[item].name}</td>
                         </tr>
                     </tbody>`;
@@ -89,25 +89,28 @@ let postConvo = (categoryid) => {
 
 
 //BUILDS THE CONVERSATION PAGE
-let convoPage = (tID) => {
+let convoPage = (tID, title) => {
     let convo = "";
     db.getComData(tID)
         .then((comData) => {
             for (let item in comData) {
+                let currentuser = user.getUser();
                 //console.log('this is the commentID', comData[item].commentID);
                 if (tID === comData[item].threadID) {
-                    convo += `<div class="border-bottom border-dark d-flex justify-content-between" id="${comData[item].threadID}">`;
+                    convo += `<div class="border-bottom border-dark d-flex justify-content-between"  id="${comData[item].threadID}">`;
                     convo += `<div class="d-flex flex-row">`;
                     convo += `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
                     convo += `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
                     convo += `</div>`;
+                    if (comData[item].uid === currentuser) {
                     convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-start mt-2">Delete</button>`;
+                    }
                     convo += `</div>`;
                 } else if (comData === 0) {
                     convo = `no comments yet`;
                 }
                 $('#dom-updater').html(`
-            <button type="button" id="add-com" value="${tID}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
+            <button type="button" id="add-com" value="${tID}" name="${title}" class="btn btn-primary btn-sm mb-5">Add Comment</button><br>
             ${convo}
             `);
             }
@@ -117,9 +120,10 @@ let convoPage = (tID) => {
 
 
 //SHOWS THE ADD COMMENT PAGE WHEN "ADD COMMENT" IS CLICKED
-let addCom = (value) => {
+let addCom = (value, title) => {
+    console.log(value, title);
     $('#dom-updater').html(`
-    <button type="button" value="${value}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
+    <button type="button" value="${value}" name="${title}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
     <div class="form-group">
         <textarea class="form-control" id="comment-area" rows="3"></textarea>
     </div>

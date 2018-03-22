@@ -90,15 +90,19 @@ $('#dom-updater').on("click", "#post-convo", function() {
 
 //LOAD CONVERSATION PAGE VIA CLICKING ON THREADS
 $('#dom-updater').on('click', '.thread-btn', function(event) {
-    console.log(event.target.id);
+    let val = event.currentTarget.attributes[2].value;
+    DOM.threadHeader(val);
+    console.log(val);
     DOM.convoPage(event.target.id);
 });
 
 
 //LOADS THE ADD COMMENT PAGE VIA THE ADD COMMENT BUTTON
-$('#dom-updater').on('click', '#add-com', function() {
+$('#dom-updater').on('click', '#add-com', function(event) {
     let val = $('#add-com').val();
-    DOM.addCom(val);
+    console.log('this is the event Target', event.target);
+    let title = event.target.name;
+    DOM.addCom(val, title);
     DOM.addComHeader();
 });
 
@@ -107,9 +111,10 @@ $('#dom-updater').on('click', '#add-com', function() {
 $('#dom-updater').on("click", "#post-com", function() {
     let comment = $('#comment-area').val();
     let threadID = $('#post-com').val();
-    db.addComment(db.buildCommentObj(threadID, comment, user.getUserName()))
+    db.addComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()))
     .then((data) => { 
         DOM.convoPage(threadID);
+        DOM.threadHeader();
     });
 });
 

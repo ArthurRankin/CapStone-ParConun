@@ -97,11 +97,12 @@ let getThreadData = (categoryID) => {
 
 
  //BUILDING THE COMMENTS OBJECT
- let buildCommentObj = (thread, comment, userName) => {
+ let buildCommentObj = (thread, comment, userName, userID) => {
     let commentObj = {
         threadID: thread,
         comments: comment,
-        name: userName
+        name: userName,
+        uid: userID
     };
     return commentObj;
 };
