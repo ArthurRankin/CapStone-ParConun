@@ -103,7 +103,8 @@ let convoPage = (tID, title) => {
                     convo += `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
                     convo += `</div>`;
                     if (comData[item].uid === currentuser) {
-                    convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-start mt-2">Delete</button>`;
+                    convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-end mt-2">Delete</button>`;
+                    convo += `<button type="button" id="edit-btn" value="${comData[item].commentID}" class="btn btn-secondary align-self-start mt-2">Edit Comment</button>`;    
                     }
                     convo += `</div>`;
                 } else if (comData === 0) {
@@ -132,6 +133,18 @@ let addCom = (value, title) => {
 };
 
 
+let editCom = (value, title) => {
+    console.log(value, title);
+    $('#dom-updater').html(`
+    <button type="button" value="${value}" name="${title}" id="edit-com" class="btn btn-primary btn-sm mb-3">Edit Comment</button><br>
+    <div class="form-group">
+        <textarea class="form-control" id="comment-area" rows="3"></textarea>
+    </div>
+
+    `);
+};
+
+
 
 
 
@@ -143,5 +156,6 @@ module.exports = {
     threadHeader,
     convoPage,
     addCom,
-    addComHeader
+    addComHeader,
+    editCom
 };

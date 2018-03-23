@@ -146,6 +146,17 @@ function deleteComment(commentID) {
     });
 }
 
+//USES THE COMMENT IF TO EDIT THE COMMENT 
+function editComment(commentObj, commentId) {
+    return $.ajax({
+      url:`${FBconfig.getFBsettings().databaseURL}/comments/${commentId}/.json`,
+      type:'PATCH',
+      data: JSON.stringify(commentObj)
+    }).done((data) => {
+      return data;
+    });
+  }
+
 
 
 module.exports = {
@@ -158,4 +169,5 @@ module.exports = {
     buildCommentObj, 
     addComment,
     getComData,
-    deleteComment};
+    deleteComment,
+    editComment};

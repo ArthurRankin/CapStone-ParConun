@@ -100,7 +100,6 @@ $('#dom-updater').on('click', '.thread-btn', function(event) {
 //LOADS THE ADD COMMENT PAGE VIA THE ADD COMMENT BUTTON
 $('#dom-updater').on('click', '#add-com', function(event) {
     let val = $('#add-com').val();
-    console.log('this is the event Target', event.target);
     let title = event.target.name;
     DOM.addCom(val, title);
     DOM.addComHeader();
@@ -126,5 +125,25 @@ $('#dom-updater').on("click", "#delete-btn", function(e) {
     db.deleteComment(commentID)
     .then((taco) => { 
         DOM.convoPage(threadID);
+    });
+});
+
+
+//EDIT THE SELECTED COMMENT VIA EDIT BUTTON AND RELOAD THE COMMENT PAGE
+$('#dom-updater').on("click", "#edit-btn", function(event) {
+    let val = $('#add-com').val();
+    let title = event.target.name;
+    DOM.editCom(val, title);
+});
+
+
+//USE THE POST COMMENT BUTTON TO EDIT YOUR COMMENT YOU SELECTED
+$('#dom-updater').on("click", "#edit-com", function() {
+    let comment = $('#comment-area').val();
+    let threadID = $('#edit-com').val();
+    db.editComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()))
+    .then((data) => { 
+        DOM.convoPage(threadID);
+        DOM.threadHeader();
     });
 });
