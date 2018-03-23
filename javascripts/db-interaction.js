@@ -155,7 +155,7 @@ function editComment(commentObj, commentId) {
     }).done((data) => {
       return data;
     });
-  }
+}
 
 
 
