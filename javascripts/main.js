@@ -132,16 +132,19 @@ $('#dom-updater').on("click", "#delete-btn", function(e) {
 //EDIT THE SELECTED COMMENT VIA EDIT BUTTON AND RELOAD THE COMMENT PAGE
 $('#dom-updater').on("click", "#edit-btn", function(event) {
     let val = $('#add-com').val();
-    let title = event.target.name;
+    let title = event.target.value;
     DOM.editCom(val, title);
 });
 
 
 //USE THE POST COMMENT BUTTON TO EDIT YOUR COMMENT YOU SELECTED
-$('#dom-updater').on("click", "#edit-com", function() {
+$('#dom-updater').on("click", "#edit-com", function(e) {
+    let commentID = e.target.name;
+    console.log('this is the test for the comment id', commentID);
+    
     let comment = $('#comment-area').val();
     let threadID = $('#edit-com').val();
-    db.editComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()))
+    db.editComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()), commentID )
     .then((data) => { 
         DOM.convoPage(threadID);
         DOM.threadHeader();
