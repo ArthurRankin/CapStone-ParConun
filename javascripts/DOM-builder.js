@@ -97,7 +97,7 @@ let convoPage = (tID, title) => {
                 let currentuser = user.getUser();
                 //console.log('this is the commentID', comData[item].commentID);
                 if (tID === comData[item].threadID) {
-                    convo += `<div class="border-bottom border-dark d-flex justify-content-between mb-5"  id="${comData[item].threadID}">`;
+                    convo += `<div class="border-bottom border-dark d-flex justify-content-between mb-2 pb-5"  id="${comData[item].threadID}">`;
                     convo +=    `<div class="d-flex flex-row">`;
                     convo +=        `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
                     convo +=        `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
@@ -128,7 +128,6 @@ let convoPage = (tID, title) => {
 
 //SHOWS THE ADD COMMENT PAGE WHEN "ADD COMMENT" IS CLICKED
 let addCom = (value, title) => {
-    console.log(value, title);
     $('#dom-updater').html(`
     <button type="button" value="${value}" name="${title}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
     <div class="form-group">
@@ -140,7 +139,6 @@ let addCom = (value, title) => {
 
 
 let editCom = (value, title) => {
-    console.log(value, title);
     $('#dom-updater').html(`
     <button type="button" value="${value}" name="${title}" id="edit-com" class="btn btn-primary btn-sm mb-3">Edit Comment</button><br>
     <div class="form-group">
