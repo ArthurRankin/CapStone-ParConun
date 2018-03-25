@@ -5,18 +5,19 @@
 }
 
 
-.top-divs{
-    background-color:#E5BEA6;
-}
 
 
 .btn {
     background-color: #05A8AA;
+    border-radius: 0;
 }
 
-.body-div{
-    background-color: #D6E6D6;
+.btn:hover{
+    box-shadow: 3px 3px 15px black;
+
 }
+
+
 
 .small-text-para {
     font-size: .7em;

@@ -97,14 +97,20 @@ let convoPage = (tID, title) => {
                 let currentuser = user.getUser();
                 //console.log('this is the commentID', comData[item].commentID);
                 if (tID === comData[item].threadID) {
-                    convo += `<div class="border-bottom border-dark d-flex justify-content-between"  id="${comData[item].threadID}">`;
-                    convo += `<div class="d-flex flex-row">`;
-                    convo += `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
-                    convo += `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
-                    convo += `</div>`;
+                    convo += `<div class="border-bottom border-dark d-flex justify-content-between mb-5"  id="${comData[item].threadID}">`;
+                    convo +=    `<div class="d-flex flex-row">`;
+                    convo +=        `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
+                    convo +=        `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
+                    convo +=    `</div>`;
                     if (comData[item].uid === currentuser) {
-                    convo += `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="btn btn-danger align-self-end mt-2">Delete</button>`;
-                    convo += `<button type="button" id="edit-btn" value="${comData[item].commentID}" class="btn btn-secondary align-self-start mt-2">Edit Comment</button>`;    
+                    convo +=    `<div class"d-flex flex-column">`;
+                    convo +=        `<div class="p-2">`;
+                    convo +=            `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="p-2 btn btn-danger align-self-end mt-2">Delete</button>`;
+                    convo +=        `</div>`;
+                    convo +=        `<div class="p-2">`;
+                    convo +=            `<button type="button" id="edit-btn" value="${comData[item].commentID}" class="p-2 btn btn-secondary align-self-start mt-2">Edit Comment</button>`; 
+                    convo +=        `</div>`; 
+                    convo +=    `</div>`;
                     }
                     convo += `</div>`;
                 } else if (comData === 0) {
