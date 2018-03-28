@@ -17,6 +17,7 @@ $("#login").click(function() {
         console.log(userData);
         db.addUser(db.buildUserObj(userData.user.displayName));
     });
+    $('#login').addClass('hidden');
 });
 
 
@@ -62,7 +63,6 @@ $('#general').click(function() {
 //ADD CONVERSATION BUTTON
 $('#dom-updater').on("click", '#add-convo', function() {
     let id = $('#add-convo').val();
-    console.log(id);
     DOM.addPostHeader();
     DOM.postConvo(id); 
 });
@@ -74,7 +74,6 @@ $('#dom-updater').on("click", "#post-convo", function() {
     let title = $('#title-input').val();
     let comments = $('#comment-area').val();
     db.addThread(db.buildThreadObj(category, title, user.getUserName()));
-
     db.getThreadData($('#post-convo').val())
     .then((threadData) => {
         console.log(threadData);
@@ -82,7 +81,7 @@ $('#dom-updater').on("click", "#post-convo", function() {
         for (let item in threadData) {
             threadID = item;           
         }
-        db.addComment(db.buildCommentObj(threadID, comments, user.getUserName()));
+        db.addComment(db.buildCommentObj(threadID, comments, user.getUserName(), user.getUser()));
         DOM.threadBuilder($('#post-convo').val());  
     }); 
 });
@@ -99,9 +98,10 @@ $('#dom-updater').on('click', '.thread-btn', function(event) {
 
 //LOADS THE ADD COMMENT PAGE VIA THE ADD COMMENT BUTTON
 $('#dom-updater').on('click', '#add-com', function(event) {
-    let val = $('#add-com').val();
-    let title = event.target.name;
-    DOM.addCom(val, title);
+    let threadID = $('#add-com').val();
+    let commentID = event.target;
+    console.log('this is the threadID and commentID', threadID  );
+    DOM.addCom(threadID);
     DOM.addComHeader();
 });
 
@@ -133,15 +133,14 @@ $('#dom-updater').on("click", "#delete-btn", function(e) {
 $('#dom-updater').on("click", "#edit-btn", function(event) {
     let val = $('#add-com').val();
     let title = event.target.value;
+    //console.log('the edit comment button was clicked', event.target);
     DOM.editCom(val, title);
 });
 
 
 //USE THE POST COMMENT BUTTON TO EDIT YOUR COMMENT YOU SELECTED
 $('#dom-updater').on("click", "#edit-com", function(e) {
-    let commentID = e.target.name;
-    console.log('this is the test for the comment id', commentID);
-    
+    let commentID = e.target.name;    
     let comment = $('#comment-area').val();
     let threadID = $('#edit-com').val();
     db.editComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()), commentID )

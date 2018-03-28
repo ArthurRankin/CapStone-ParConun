@@ -127,9 +127,9 @@ let convoPage = (tID, title) => {
 
 
 //SHOWS THE ADD COMMENT PAGE WHEN "ADD COMMENT" IS CLICKED
-let addCom = (value, title) => {
+let addCom = (threadID) => {
     $('#dom-updater').html(`
-    <button type="button" value="${value}" name="${title}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
+    <button type="button" value="${threadID}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
     <div class="form-group">
         <textarea class="form-control" id="comment-area" rows="3"></textarea>
     </div>
