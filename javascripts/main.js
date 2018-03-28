@@ -149,3 +149,10 @@ $('#dom-updater').on("click", "#edit-com", function(e) {
         DOM.threadHeader();
     });
 });
+
+
+
+//SETTING UP THE HOME NAV BUTTON
+$('#category-nav').on("click", function() {
+    window.location.reload();
+});
