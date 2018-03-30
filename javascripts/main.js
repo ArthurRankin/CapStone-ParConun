@@ -11,11 +11,9 @@ let FBkeys = require("./fb-key"),
 
 //GOOGLE LOGIN BUTTON
 $("#login").click(function() {
-    console.log("clicked auth");
     user.logInGoogle()
     .then((userData) => {
-        console.log(userData);
-        db.addUser(db.buildUserObj(userData.user.displayName));
+        db.checkUserFB(userData.user.displayName, userData.user.uid);
     });
     $('#login').addClass('hidden');
 });
