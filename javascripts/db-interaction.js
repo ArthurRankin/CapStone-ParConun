@@ -158,6 +158,29 @@ function editComment(commentObj, commentId) {
 }
 
 
+function getFBDetails(user){
+    return $.ajax({
+        url: `${FBconfig.getFBsettings().databaseURL}//users.json?orderBy="uid"&equalTo="${user}"`
+     }).done((resolve) => {
+        return resolve;
+     }).fail((error) => {
+        return error;
+     });
+  }
+
+function checkUserFB(displayName, uid){
+    getFBDetails(uid)
+    .then((result) => {
+        let data = Object.values(result);
+         if (data.length === 0){
+            addUser(buildUserObj(displayName, uid))
+             .then((result) => {
+             });
+         }
+    });
+}
+
+
 
 module.exports = {
     buildUserObj,
@@ -170,4 +193,6 @@ module.exports = {
     addComment,
     getComData,
     deleteComment,
-    editComment};
+    editComment,
+    checkUserFB
+};
