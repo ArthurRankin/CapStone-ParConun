@@ -15,7 +15,7 @@ $("#login").click(function() {
     .then((userData) => {
         db.checkUserFB(userData.user.displayName, userData.user.uid);
     });
-    $('#login').addClass('hidden');
+    $('#log-div').html('');
 });
 
 
@@ -23,36 +23,42 @@ $("#login").click(function() {
 $('#0months').click(function() {
     DOM.catTitleUpdate("0 - 6 months old");
     DOM.threadBuilder($('#0months').attr('name'));
+    DOM.hideLogoDiv();
 });
 
 //6 MONTHS - 2 YEARS OLD CATEGORY BUTTON
 $('#6months').click(function() {
     DOM.catTitleUpdate("6 months - 2 years old");
     DOM.threadBuilder($('#6months').attr('name'));
+    DOM.hideLogoDiv();
 });
 
 //2 - 6 YEAR OLD CATEGORY BUTTON
 $('#2yearOlds').click(function() {
     DOM.catTitleUpdate("2 Years - 6 Years");
     DOM.threadBuilder($('#2yearOlds').attr('name'));
+    DOM.hideLogoDiv();
 }); 
 
 //6 - 12 YEAR OLD CATEGORY BUTTON
 $('#6years').click(function() {
     DOM.catTitleUpdate("6 Years - 12 Years");
     DOM.threadBuilder($('#6years').attr('name'));
+    DOM.hideLogoDiv();
 }); 
 
 //SPECIAL NEEDS CATEGORY BUTTON
 $('#spec-needs').click(function() {
     DOM.catTitleUpdate("Special Needs");
     DOM.threadBuilder($('#spec-needs').attr('name'));
+    DOM.hideLogoDiv();
 }); 
 
 //GENERAL CATEGORY BUTTON
 $('#general').click(function() {
     DOM.catTitleUpdate("General");
     DOM.threadBuilder($('#general').attr('name'));
+    DOM.hideLogoDiv();
 }); 
 
 
@@ -89,7 +95,6 @@ $('#dom-updater').on("click", "#post-convo", function() {
 $('#dom-updater').on('click', '.thread-btn', function(event) {
     let val = event.currentTarget.attributes[2].value;
     DOM.threadHeader(val);
-    console.log(val);
     DOM.convoPage(event.target.id);
 });
 

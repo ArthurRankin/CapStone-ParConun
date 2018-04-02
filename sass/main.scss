@@ -1,4 +1,20 @@
 
+.logo-pic {
+    height: 200%;
+    width: 100%;
+}
+
+#description {
+    font-family: Garamond;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+#t-header {
+    font-family: Garamond;
+    font-size: 1.25em;
+    font-weight: bold;
+}
 
 .thread-btn:hover {
     box-shadow: 2px 2px 20px black;
@@ -8,23 +24,57 @@
     visibility: hidden;
 }
 
+#convo-paras {
+    font-size: 1.2em;
+}
+
+#convo-user{
+    font-size:0.95em;
+}
 
 .btn {
     background-color: #05A8AA;
     border-radius: 0;
 }
 
+hr{
+    color:black;
+}
+
+.change-btn{
+    background-color: white;
+    color:red;
+    font-size: .8em;
+}
 .btn:hover{
     box-shadow: 3px 3px 15px black;
 
 }
 
+a {
+    font-size: 1.2em;
+}
 
+
+a:hover {
+    color: #05A8AA;
+}
 
 .small-text-para {
-    font-size: .7em;
+    font-size: 1em;
 }
 
 .nav-link {
     color: black;
 }
+
+.slogan{
+    color:#DC602E;
+}
+
+#logo-div{
+    background-image:url("../images/background-photo.jpg");
+    color:white;
+    background-blend-mode: lighten;
+}
+
