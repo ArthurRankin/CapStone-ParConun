@@ -8,7 +8,9 @@ let FBkeys = require("./fb-key"),
     db = require("./db-interaction"),
     helper = require("./helper");
 
-
+let hideLogoDiv = () => {
+    $('#logo-div').html('');
+};
 
 //UPDATING THE TOP DIV DEPENDING ON CATEGORY CLICKED ON
 let catTitleUpdate = (category) => {
@@ -161,5 +163,6 @@ module.exports = {
     convoPage,
     addCom,
     addComHeader,
-    editCom
+    editCom,
+    hideLogoDiv
 };
