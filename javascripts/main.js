@@ -15,7 +15,7 @@ $("#login").click(function() {
     .then((userData) => {
         db.checkUserFB(userData.user.displayName, userData.user.uid);
     });
-    $('#login').addClass('hidden');
+    $('#log-div').html('');
 });
 
 
