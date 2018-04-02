@@ -14,24 +14,28 @@ let hideLogoDiv = () => {
 
 //UPDATING THE TOP DIV DEPENDING ON CATEGORY CLICKED ON
 let catTitleUpdate = (category) => {
-    $('#description').html(`<u>${category}</u>`);
+    $('#description').html(`<h2>${category}</h2>`);
     $('#decrtiption').addClass('');
 };
 
 
 //"ADD CONVERSATION" TOP HEADER UPDATE
 let addPostHeader = () => {
-    $('#description').html(`<u>Add Conversation</u>`);
+    $('#description').html(`<h2>Add Conversation</h2>`);
 };
 
 //UPDATING THE HEADER WHEN A THREAD IS CLICKED
 let threadHeader = (title) => { 
-    $('#description').html(`<u value='${title}' id='t-header'>${title}</u>`);
+    $('#description').html(`
+    <h2 value='${title}' class="pt-3" id='t-header'>${title}</h2>
+    <hr noshade>`);
+    $('#description-div').removeClass('justify-content-center').addClass('container p-2 justify-content-start');
+    $('#how-to').html("").removeClass();
 };
 
 //UPDATES THE HEADER ON THE ADD COMMENT PAGE
 let addComHeader = () => {
-    $('#description').html(`<u>Add Comment</u>`);
+    $('#description').html(`<h2>Add Comment</h2>`);
 };
 
 
@@ -99,18 +103,18 @@ let convoPage = (tID, title) => {
                 let currentuser = user.getUser();
                 //console.log('this is the commentID', comData[item].commentID);
                 if (tID === comData[item].threadID) {
-                    convo += `<div class="border-bottom border-dark d-flex justify-content-between mb-2 pb-5"  id="${comData[item].threadID}">`;
-                    convo +=    `<div class="d-flex flex-row">`;
-                    convo +=        `<h5 class="ml-2 mt-5 pb-4">${comData[item].name}</h6>`;
-                    convo +=        `<p class="ml-5 pt-5 align-self-end">${comData[item].comments}<p>`;
+                    convo += `<div class="border-bottom border-dark d-flex flex-column mb-2 pt-5"  id="${comData[item].threadID}">`;
+                    convo +=    `<div class="d-flex flex-column">`;
+                    convo +=        `<h5 id="convo-user" class="pb-3">${comData[item].name}</h5>`;
+                    convo +=        `<p id="convo-paras" class="pt-3 pb-2">${comData[item].comments}<p>`;
                     convo +=    `</div>`;
                     if (comData[item].uid === currentuser) {
-                    convo +=    `<div class"d-flex flex-column">`;
+                    convo +=    `<div class="d-flex flex-row">`;
                     convo +=        `<div class="p-2">`;
-                    convo +=            `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="p-2 btn btn-danger align-self-end mt-2">Delete</button>`;
+                    convo +=            `<button type="button" id="delete-btn" value="${comData[item].commentID}" class="change-btn p-2 btn btn-danger align-self-end mt-1">Delete</button>`;
                     convo +=        `</div>`;
                     convo +=        `<div class="p-2">`;
-                    convo +=            `<button type="button" id="edit-btn" value="${comData[item].commentID}" class="p-2 btn btn-secondary align-self-start mt-2">Edit Comment</button>`; 
+                    convo +=            `<button type="button" id="edit-btn" value="${comData[item].commentID}" class="change-btn p-2 btn btn-secondary align-self-start mt-1">Edit Comment</button>`; 
                     convo +=        `</div>`; 
                     convo +=    `</div>`;
                     }

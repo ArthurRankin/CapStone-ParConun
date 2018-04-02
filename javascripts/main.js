@@ -95,7 +95,6 @@ $('#dom-updater').on("click", "#post-convo", function() {
 $('#dom-updater').on('click', '.thread-btn', function(event) {
     let val = event.currentTarget.attributes[2].value;
     DOM.threadHeader(val);
-    console.log(val);
     DOM.convoPage(event.target.id);
 });
 
