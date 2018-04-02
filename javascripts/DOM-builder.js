@@ -9,7 +9,7 @@ let FBkeys = require("./fb-key"),
     helper = require("./helper");
 
 let hideLogoDiv = () => {
-    $('#logo-div').html('');
+    $('#logo-div').html('').addClass('hidden');
 };
 
 //UPDATING THE TOP DIV DEPENDING ON CATEGORY CLICKED ON
@@ -28,8 +28,8 @@ let addPostHeader = () => {
 let threadHeader = (title) => { 
     $('#description').html(`
     <h2 value='${title}' class="pt-3" id='t-header'>${title}</h2>
-    <hr noshade>`);
-    $('#description-div').removeClass('justify-content-center').addClass('container p-2 justify-content-start');
+    <hr width="200%" height="2px" noshade>`);
+    $('#description-div').removeClass('justify-content-center text-center').addClass('container p-2 justify-content-start');
     $('#how-to').html("").removeClass();
 };
 

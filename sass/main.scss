@@ -38,8 +38,6 @@
 }
 
 hr{
-    width: 200%;
-    height:2px;
     color:black;
 }
 
@@ -53,11 +51,9 @@ hr{
 
 }
 
-
 a {
     font-size: 1.2em;
 }
-
 
 
 a:hover {
@@ -71,3 +67,14 @@ a:hover {
 .nav-link {
     color: black;
 }
+
+.slogan{
+    color:#DC602E;
+}
+
+#logo-div{
+    background-image:url("../images/background-photo.jpg");
+    color:white;
+    background-blend-mode: lighten;
+}
+
