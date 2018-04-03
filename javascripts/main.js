@@ -136,11 +136,11 @@ $('#dom-updater').on("click", "#delete-btn", function(e) {
 
 //EDIT THE SELECTED COMMENT VIA EDIT BUTTON AND RELOAD THE COMMENT PAGE
 $('#dom-updater').on("click", "#edit-btn", function(event) {
-    let val = $('#add-com').val();
+    let commentID = $('#edit-btn').val();
     let threadTitle = $('#add-com').attr('name');
     let title = event.target.value;
     //console.log('the edit comment button was clicked', event.target);
-    DOM.editCom(val, threadTitle);
+    DOM.editCom(commentID, threadTitle);
 });
 
 

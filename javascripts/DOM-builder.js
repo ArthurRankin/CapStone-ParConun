@@ -149,9 +149,9 @@ let addCom = (threadID, threadTitle) => {
 };
 
 
-let editCom = (value, title) => {
+let editCom = (commentID, title) => {
     $('#dom-updater').html(`
-    <button type="button" value="${value}" name="${title}" id="edit-com" class="btn btn-primary btn-sm mb-3">Edit Comment</button><br>
+    <button type="button" value="${commentID}" name="${title}" id="edit-com" class="btn btn-primary btn-sm mb-3">Edit Comment</button><br>
     <div class="form-group">
         <textarea class="form-control" id="comment-area" rows="3"></textarea>
     </div>
@@ -174,5 +174,4 @@ module.exports = {
     addComHeader,
     editCom,
     hideLogoDiv,
-    editComHeader
 };
