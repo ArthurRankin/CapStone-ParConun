@@ -38,6 +38,11 @@ let addComHeader = () => {
     $('#description').html(`<h2>Add Comment</h2>`);
 };
 
+let editComHeader = () => {
+    $('#description').html(`<h2>Edit Comment</h2>`);
+};
+
+
 
 
 
@@ -133,9 +138,9 @@ let convoPage = (tID, title) => {
 
 
 //SHOWS THE ADD COMMENT PAGE WHEN "ADD COMMENT" IS CLICKED
-let addCom = (threadID) => {
+let addCom = (threadID, threadTitle) => {
     $('#dom-updater').html(`
-    <button type="button" value="${threadID}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
+    <button type="button" value="${threadID}" name="${threadTitle}" id="post-com" class="btn btn-primary btn-sm mb-3">Post Comment</button><br>
     <div class="form-group">
         <textarea class="form-control" id="comment-area" rows="3"></textarea>
     </div>
@@ -168,5 +173,6 @@ module.exports = {
     addCom,
     addComHeader,
     editCom,
-    hideLogoDiv
+    hideLogoDiv,
+    editComHeader
 };

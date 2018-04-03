@@ -95,16 +95,17 @@ $('#dom-updater').on("click", "#post-convo", function() {
 $('#dom-updater').on('click', '.thread-btn', function(event) {
     let val = event.currentTarget.attributes[2].value;
     DOM.threadHeader(val);
-    DOM.convoPage(event.target.id);
+    DOM.convoPage(event.target.id, val);
 });
 
 
 //LOADS THE ADD COMMENT PAGE VIA THE ADD COMMENT BUTTON
 $('#dom-updater').on('click', '#add-com', function(event) {
     let threadID = $('#add-com').val();
-    let commentID = event.target;
-    console.log('this is the threadID and commentID', threadID  );
-    DOM.addCom(threadID);
+    let commentID = event;
+    let threadTitle = $('#add-com').attr('name');
+    console.log('this is the comment id', commentID  );
+    DOM.addCom(threadID, threadTitle);
     DOM.addComHeader();
 });
 
@@ -113,10 +114,11 @@ $('#dom-updater').on('click', '#add-com', function(event) {
 $('#dom-updater').on("click", "#post-com", function() {
     let comment = $('#comment-area').val();
     let threadID = $('#post-com').val();
+    let threadTitle = $('#post-com').attr('name');
     db.addComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()))
     .then((data) => { 
-        DOM.convoPage(threadID);
-        DOM.threadHeader();
+        DOM.convoPage(threadID, threadTitle);
+        DOM.threadHeader(threadTitle);
     });
 });
 
@@ -135,9 +137,10 @@ $('#dom-updater').on("click", "#delete-btn", function(e) {
 //EDIT THE SELECTED COMMENT VIA EDIT BUTTON AND RELOAD THE COMMENT PAGE
 $('#dom-updater').on("click", "#edit-btn", function(event) {
     let val = $('#add-com').val();
+    let threadTitle = $('#add-com').attr('name');
     let title = event.target.value;
     //console.log('the edit comment button was clicked', event.target);
-    DOM.editCom(val, title);
+    DOM.editCom(val, threadTitle);
 });
 
 
@@ -146,10 +149,11 @@ $('#dom-updater').on("click", "#edit-com", function(e) {
     let commentID = e.target.name;    
     let comment = $('#comment-area').val();
     let threadID = $('#edit-com').val();
+    let threadTitle = $('#edit-com').attr('name');
     db.editComment(db.buildCommentObj(threadID, comment, user.getUserName(), user.getUser()), commentID )
     .then((data) => { 
-        DOM.convoPage(threadID);
-        DOM.threadHeader();
+        DOM.convoPage(threadID, threadTitle);
+        DOM.threadHeader(threadTitle);
     });
 });
 
@@ -158,4 +162,5 @@ $('#dom-updater').on("click", "#edit-com", function(e) {
 //SETTING UP THE HOME NAV BUTTON
 $('#category-nav').on("click", function() {
     window.location.reload();
+    $('#log-div').html('');
 });
