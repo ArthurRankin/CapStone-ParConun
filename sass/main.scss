@@ -75,6 +75,8 @@ a:hover {
 
 #logo-div{
     background-image:url("../images/background-photo.jpg");
+    background-size: cover;
+    height: 80%;
     color:white;
     background-blend-mode: lighten;
 }
